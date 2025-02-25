@@ -1,0 +1,29 @@
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "srirkwoodlands-c6da8",
+          "configurations": {
+            "web": "1:73745276255:web:5b3d1747466ce79615eaea"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects" : [
+      {
+        "source" : "/_/auth/handler",
+        "destination" : "/",
+        "type" : 302
+      }
+    ]
+  }
+}
