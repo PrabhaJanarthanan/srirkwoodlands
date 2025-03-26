@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
-import 'package:profinix_app/website/pages/shopping/orderconfirmation_page.dart';
+import 'package:profinix_app/website/pages/shopping/order_confirmation/orderconfirmation_desktop.dart';
 
-class CheckoutPage extends StatelessWidget {
+import '../../../controller/auth_controller.dart';
+
+class CheckoutDesktop extends StatelessWidget {
   final CartController cartController = Get.find();
 
   final TextEditingController firstNameController = TextEditingController();
@@ -31,8 +33,73 @@ class CheckoutPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Checkout Page',
               style: TextStyle(color: Colors.white)),
+              centerTitle: true,
+               iconTheme: const IconThemeData(color: Colors.white), 
+               actions: [
+    // Home Button before user icon
+    IconButton(
+      icon: const Icon(Icons.home, color: Colors.white),
+      onPressed: () {
+        // Navigate to Home page when tapped
+        Get.toNamed('/home'); // Update with your home route if needed
+      },
+    ),
+    
+    Obx(() {
+      final user = AuthController.instance.user.value;
+      return user != null
+          ? Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: GestureDetector(
+                onTap: () {
+                  // Logout confirmation
+                  Get.defaultDialog(
+                    title: "Logout",
+                    middleText: "Are you sure you want to logout?",
+                    textConfirm: "Logout",
+                    textCancel: "Cancel",
+                    confirmTextColor: Colors.white,
+                    buttonColor: Colors.red,
+                    onConfirm: () {
+                      AuthController.instance.signOut();
+                      Get.back(); // Close dialog
+                    },
+                  );
+                },
+                child: CircleAvatar(
+                     backgroundImage: user.photoURL != null
+                      ? NetworkImage(user.photoURL!)
+                      : null, // Display user photo if available
+                  child: user.photoURL == null
+                      ? Icon(Icons.person, size: 20, color: Colors.white)
+                      : null, // Default icon if no photo
+                 // child: Icon(Icons.person, size: 20, color: Colors.white),
+                ),
+              ),
+            )
+          : IconButton(
+              icon: Icon(Icons.login_sharp, color: Colors.white),
+              onPressed: () async {
+                bool isLoggedIn = await AuthController.instance.signInWithGoogle();
+                if (isLoggedIn) {
+                  Get.snackbar("Success", "Logged in successfully!",
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white);
+                }
+              },
+            );
+    }),
+  ],
+            //   actions: [
+            //      RawMaterialButton(onPressed: (){
+            //   Get.toNamed('/');
+            // }, child: const Icon(Icons.home, color: Colors.white,
+            // shadows: [BoxShadow(spreadRadius: 0.4)],
+            // size: 32),),
+            //   ],
           backgroundColor: Colors.transparent,
         ),
+        
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: Center(
@@ -277,55 +344,7 @@ class CheckoutPage extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     if (!_formKey.currentState!.validate()) {
-                    //       return;
-                    //     }
-                    //     if (firstNameController.text.isEmpty ||
-                    //         emailController.text.isEmpty ||
-                    //         businessNameController.text.isEmpty ||
-                    //         gstNumberController.text.isEmpty ||
-                    //         addressLine1Controller.text.isEmpty ||
-                    //         pincodeController.text.isEmpty ||
-                    //         countryController.text.isEmpty ||
-                    //         stateController.text.isEmpty ||
-                    //         phoneController.text.isEmpty) {
-                    //       Get.snackbar(
-                    //           'Error', 'Please fill in all Madatory fields',
-                    //           backgroundColor: Colors.red,
-                    //           colorText: Colors.white);
-                    //       return;
-                    //     }
-
-                    //     Get.to(() => OrderConfirmationPage(
-                    //           firstName: firstNameController.text,
-                    //           lastName: lastNameController.text,
-                    //           addressLine1: addressLine1Controller.text,
-                    //           postalCode: pincodeController.text,
-                    //           country: countryController.text,
-                    //           state: stateController.text,
-                    //           phone: phoneController.text,
-                    //           email: emailController.text,
-                    //           businessName:
-                    //               businessNameController.text.isNotEmpty
-                    //                   ? businessNameController.text
-                    //                   : "N/A",
-                    //           gstNumber: gstNumberController.text.isNotEmpty
-                    //               ? gstNumberController.text
-                    //               : "N/A",
-                    //         ));
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //     backgroundColor: Color.fromARGB(255, 233, 156, 13),
-                    //     minimumSize: const Size(double.infinity, 50),
-                    //   ),
-                    //   child: const Text(
-                    //     'Proceed to Confirmation',
-                    //     style: TextStyle(color: Colors.white, fontSize: 18),
-                    //   ),
-                    // ),
-
+                 
                     ElevatedButton(
                       onPressed: () {
                         if (!_formKey.currentState!.validate()) {
@@ -338,7 +357,7 @@ class CheckoutPage extends StatelessWidget {
                           return;
                         }
 
-                        Get.to(() => OrderConfirmationPage(
+                        Get.to(() => OrderConfirmationDesktop(
                               firstName: firstNameController.text,
                               lastName: lastNameController.text,
                               addressLine1: addressLine1Controller.text,

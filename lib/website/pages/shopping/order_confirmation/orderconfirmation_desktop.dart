@@ -4,7 +4,8 @@ import 'package:profinix_app/website/controller/order_controller.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
 import 'package:profinix_app/website/pages/shopping/orderplacedmessage.dart';
 
-class OrderConfirmationPage extends StatefulWidget {
+
+class OrderConfirmationDesktop extends StatefulWidget {
   final String firstName;
   final String lastName;
   final String phone;
@@ -17,7 +18,7 @@ class OrderConfirmationPage extends StatefulWidget {
   final String businessName;
   final String gstNumber;
 
-  OrderConfirmationPage({
+  OrderConfirmationDesktop({
     required this.firstName,
     required this.lastName,
     required this.phone,
@@ -32,10 +33,10 @@ class OrderConfirmationPage extends StatefulWidget {
   });
 
   @override
-  _OrderConfirmationPageState createState() => _OrderConfirmationPageState();
+  _OrderConfirmationDesktopState createState() => _OrderConfirmationDesktopState();
 }
 
-class _OrderConfirmationPageState extends State<OrderConfirmationPage> {
+class _OrderConfirmationDesktopState extends State<OrderConfirmationDesktop> {
   final CartController cartController = Get.find();
   double shippingCharges = 100.0;
   double gstRate = 12.0;
@@ -58,8 +59,11 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
             title: const Text('Confirm Your Order',
-                style: TextStyle(color: Colors.white)),
+                style: TextStyle(color: Colors.white),
+                ),
+                 iconTheme: const IconThemeData(color: Colors.white), 
             backgroundColor: Colors.transparent),
+            
         body: Padding(
           padding: const EdgeInsets.all(20),
           child: Center(
@@ -149,7 +153,6 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage> {
                             ],
                           ),
 
-                          // Invoice and Order Summary (with GST and Shipping Charges)
                           Obx(() => Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -190,6 +193,8 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage> {
 
                           const SizedBox(height: 10),
 
+
+
                           ElevatedButton(
                             onPressed: () async {
                               cartController.isLoading.value = true;
@@ -213,7 +218,7 @@ class _OrderConfirmationPageState extends State<OrderConfirmationPage> {
                             ),
                             child: Obx(() => cartController.isLoading.value
                                 ? const CircularProgressIndicator(
-                                    color: Colors.white) // Show Loader
+                                    color: Colors.white) 
                                 : const Text(
                                     'Place your Order',
                                     style: TextStyle(

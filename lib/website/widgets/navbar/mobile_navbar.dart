@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:profinix_app/website/controller/auth_controller.dart';
 import 'package:profinix_app/website/utils/constants.dart';
 import 'package:profinix_app/website/utils/demorequest_sheet.dart';
+import 'package:profinix_app/website/utils/show_ordersdialog.dart';
 import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class MobileNavBar extends StatefulWidget {
@@ -89,7 +92,7 @@ class _MobileNavBarState extends State<MobileNavBar> {
                         borderRadius: BorderRadius.circular(20),
                       )),
                   onPressed: () {
-                    Get.toNamed('/shopping');
+                    Get.toNamed('/shoppingmobile');
                   },
                   child: const ProText(
                     'Shop',
@@ -145,7 +148,7 @@ class _MobileNavBarState extends State<MobileNavBar> {
                       ],
                     ),
                     onTap: () {
-                      widget.onNavItemTap(1);
+                      widget.onNavItemTap(2);
                       _toggleMenu();
                     },
                   ),
@@ -167,40 +170,78 @@ class _MobileNavBarState extends State<MobileNavBar> {
                       _toggleMenu();
                     },
                   ),
-                  ListTile(
-                    title: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.login_outlined, color: Colors.white),
-                        SizedBox(width: 8),
-                        ProText(
-                          'Login',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    onTap: () {
-                      login_launchURL();
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.currency_rupee_outlined,
-                            color: Colors.white),
-                        SizedBox(width: 8), // Space between icon and text
-                        Text(
-                          'Pricing',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    onTap: () {
-                      Get.toNamed('/pricing');
-                    },
-                  ),
+                 GetX<AuthController>(
+  builder: (controller) {
+    return (controller.user.value != null &&
+            controller.user.value!.uid.isNotEmpty)
+        ? PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'Logout') {
+                AuthController.instance.signOut();
+                Get.offAllNamed('/');
+              } else if (value == 'My Orders') {
+                Get.to(() => const MyOrdersPage());
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'My Orders',
+                child: Row(
+                  children: [
+                    Icon(Icons.list_alt, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text("My Orders"),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 'Logout',
+                child: Row(
+                  children: [
+                    Icon(Icons.logout, color: Colors.black),
+                    SizedBox(width: 8),
+                    Text("Logout"),
+                  ],
+                ),
+              ),
+            ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Obx(() {
+                return CircleAvatar(
+                  backgroundColor: Colors.grey[300],
+                  backgroundImage: (controller.user.value?.photoURL != null)
+                      ? CachedNetworkImageProvider(
+                          controller.user.value!.photoURL!)
+                      : null,
+                  radius: 18,
+                  child: controller.user.value?.photoURL == null
+                      ? Icon(Icons.person, size: 20, color: Colors.white)
+                      : null,
+                );
+              }),
+            ),
+          )
+        : ListTile(
+            title: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.login_outlined, color: Colors.white),
+                SizedBox(width: 8),
+                ProText(
+                  'Login',
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+            onTap: () {
+              AuthController.instance.signInWithGoogle();
+              Navigator.pop(context); // Close the drawer
+            },
+          );
+  },
+),
+
                 ],
               ),
             ),

@@ -94,14 +94,11 @@ class _DesktopNavBarState extends State<DesktopNavBar>
                   navButton('Home', widget.scrollToHome, 0, fontSize),
                   navButton('Contact Us', () {
                     Get.toNamed('/contactUs');
-                  }, 5, fontSize),
-                  //navButton('About Us', widget.scrollToFeatures, 2, fontSize),
-                  //navButton('Contact Us', widget.scrollToContact, 3, fontSize),
-
-                  //navButton('Login', login_launchURL, 4, fontSize),
+                  }, 1, fontSize),
+                
                   navButton('Shop with Us', () {
                     Get.toNamed('/shopping');
-                  }, 5, fontSize),
+                  }, 2, fontSize),
                   GetX<AuthController>(
                     builder: (controller) {
                       return (controller.user.value != null &&
@@ -154,19 +151,19 @@ class _DesktopNavBarState extends State<DesktopNavBar>
                                           "Image failed to load! Updating...");
                                       controller.updateUserData();
                                     },
+                                    radius: 18,
                                     child:
                                         controller.user.value?.photoURL == null
                                             ? Icon(Icons.person,
                                                 size: 20, color: Colors.white)
                                             : null,
-                                    radius: 18,
                                   );
                                 }),
                               ),
                             )
                           : navButton('Login', () {
                               AuthController.instance.signInWithGoogle();
-                            }, 4, fontSize);
+                            }, 3, fontSize);
                     },
                   )
                 ],

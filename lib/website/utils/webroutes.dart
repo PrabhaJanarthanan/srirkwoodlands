@@ -9,7 +9,9 @@ import 'package:profinix_app/website/pages/loginpage/signup_desktop.dart';
 import 'package:profinix_app/website/pages/mainfeatures/mainfeatures_tablet.dart';
 import 'package:profinix_app/website/pages/refundpolicy/refund.dart';
 import 'package:profinix_app/website/pages/shippinganddelivery/shipping_desktop.dart';
-import 'package:profinix_app/website/pages/shopping/product_listingpage.dart';
+import 'package:profinix_app/website/pages/shopping/product_listing/product_listing.dart';
+import 'package:profinix_app/website/pages/shopping/product_listing/product_listing_mobile.dart';
+import 'package:profinix_app/website/pages/shopping/product_listing/product_listing_desktop.dart';
 import 'routes_exporter.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -40,6 +42,7 @@ final List<GetPage> webroutes = [
   GetPage(name: '/contactpage', page: () => ContactPage()),
   GetPage(name: '/contactUs', page: () => ContactUs()),
   GetPage(name: '/footer', page: () => Footer()),
+  GetPage(name: '/shopping', page: () => ProductListing()),
 
   //widgets
   GetPage(
@@ -86,8 +89,8 @@ final List<GetPage> webroutes = [
 
 //pricing
 
-  GetPage(name: '/shopping', page: () => ProductListingPage()),
-  //GetPage(name: '/shoppingmobile', page: () => ProductListingPageMobile()),
+   GetPage(name: '/shoppingdesktop', page: () => ProductListingDesktop()),
+   GetPage(name: '/shoppingmobile', page: () => ProductListingMobile()),
   GetPage(name: '/features', page: () => FeaturesPage()),
   //about pages
   GetPage(name: '/termsandconditions', page: () => TermsandConditions()),

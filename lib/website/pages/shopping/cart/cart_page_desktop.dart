@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profinix_app/website/controller/auth_controller.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
-import 'package:profinix_app/website/pages/shopping/checkout_page.dart';
+import 'package:profinix_app/website/pages/shopping/checkout/checkout_desktop.dart';
 
-class CartPage extends StatelessWidget {
+class CartPageDesktop extends StatelessWidget {
   final CartController cartController = Get.find();
 
   @override
@@ -23,8 +23,17 @@ class CartPage extends StatelessWidget {
             'Your Cart',
             style: TextStyle(color: Colors.white),
           ),
+           iconTheme: const IconThemeData(color: Colors.white), 
           backgroundColor: Colors.transparent,
           actions: [
+                // Home Button before user icon
+    IconButton(
+      icon: const Icon(Icons.home, color: Colors.white),
+      onPressed: () {
+        // Navigate to Home page when tapped
+        Get.toNamed('/home'); // Update with your home route if needed
+      },
+    ),
             Obx(() {
               final user = AuthController.instance.user.value;
               return user != null
@@ -47,13 +56,19 @@ class CartPage extends StatelessWidget {
                           );
                         },
                         child: CircleAvatar(
-                          child:
-                              Icon(Icons.person, size: 20, color: Colors.white),
+                             backgroundImage: user.photoURL != null
+                      ? NetworkImage(user.photoURL!)
+                      : null, // Display user photo if available
+                  child: user.photoURL == null
+                      ? Icon(Icons.person, size: 20, color: Colors.white)
+                      : null, // Default icon if no photo
+                        //  child:
+                              //Icon(Icons.person, size: 20, color: Colors.white),
                         ),
                       ),
                     )
                   : IconButton(
-                      icon: Icon(Icons.login, color: Colors.white),
+                      icon: Icon(Icons.login_sharp, color: Colors.white),
                       onPressed: () async {
                         bool isLoggedIn =
                             await AuthController.instance.signInWithGoogle();
@@ -74,13 +89,7 @@ class CartPage extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(20),
-              // boxShadow: const [
-              //   BoxShadow(
-              //     // color: Color.fromARGB(255, 233, 156, 13),
-              //     blurRadius: 10,
-              //     offset: Offset(0, 4), // Optional: Adjust the shadow's offset
-              //   ),
-              //],
+     
             ),
             child: Column(
               children: [
@@ -219,7 +228,7 @@ class CartPage extends StatelessWidget {
                         bool isLoggedIn =
                             await AuthController.instance.signInWithGoogle();
                         if (isLoggedIn) {
-                          Get.to(() => CheckoutPage());
+                          Get.to(() => CheckoutDesktop());
                         }
                       },
                       onCancel: () {
@@ -227,7 +236,7 @@ class CartPage extends StatelessWidget {
                       },
                     );
                   } else {
-                    Get.to(() => CheckoutPage());
+                    Get.to(() => CheckoutDesktop());
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -244,22 +253,7 @@ class CartPage extends StatelessWidget {
                 ),
               )
 
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Get.to(() => CheckoutPage());
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Color.fromARGB(255, 233, 156, 13),
-              //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              //     textStyle: const TextStyle(
-              //       fontSize: 16,
-              //     ),
-              //   ),
-              //   child: const Text(
-              //     'Checkout',
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              // ),
+
               ),
         ),
       ),

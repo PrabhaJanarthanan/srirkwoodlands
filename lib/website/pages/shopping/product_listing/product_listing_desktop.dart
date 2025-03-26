@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/pages/shopping/cart_page.dart';
+import 'package:profinix_app/website/pages/shopping/cart/cart_page_desktop.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
 import 'package:profinix_app/website/pages/shopping/product_card.dart';
 
-class ProductListingPage extends StatefulWidget {
+import '../../../controller/auth_controller.dart';
+
+class ProductListingDesktop extends StatefulWidget {
   @override
-  _ProductListingPageState createState() => _ProductListingPageState();
+  _ProductListingDesktopState createState() => _ProductListingDesktopState();
 }
 
-class _ProductListingPageState extends State<ProductListingPage> {
+class _ProductListingDesktopState extends State<ProductListingDesktop> {
   final CartController cartController = Get.put(CartController());
 
   List<Map<String, dynamic>> products = [
@@ -133,33 +135,102 @@ class _ProductListingPageState extends State<ProductListingPage> {
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
+           iconTheme: const IconThemeData(color: Colors.white), 
+           actions: [
+          
+    IconButton(
+      icon: const Icon(Icons.home, color: Colors.white),
+      onPressed: () {
+        Get.toNamed('/home'); 
+      },
+    ),
+    
+    Obx(() {
+      final user = AuthController.instance.user.value;
+      return user != null
+          ? Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: GestureDetector(
+                onTap: () {
+                  // Logout confirmation
+                  Get.defaultDialog(
+                    title: "Logout",
+                    middleText: "Are you sure you want to logout?",
+                    textConfirm: "Logout",
+                    textCancel: "Cancel",
+                    confirmTextColor: Colors.white,
+                    buttonColor: Colors.red,
+                    onConfirm: () {
+                      AuthController.instance.signOut();
+                      Get.back(); // Close dialog
+                    },
+                  );
+                },
+                child: CircleAvatar(
+                     backgroundImage: user.photoURL != null
+                      ? NetworkImage(user.photoURL!)
+                      : null, // Display user photo if available
+                  child: user.photoURL == null
+                      ? Icon(Icons.person, size: 20, color: Colors.white)
+                      : null, // Default icon if no photo
+
+                ),
+              ),
+            )
+          : IconButton(
+              icon: Icon(Icons.login_sharp, color: Colors.white),
+              onPressed: () async {
+                bool isLoggedIn = await AuthController.instance.signInWithGoogle();
+                if (isLoggedIn) {
+                  Get.snackbar("Success", "Logged in successfully!",
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white,
+                       duration: Duration(seconds: 2),
+                      snackPosition: SnackPosition.BOTTOM);
+                }
+              },
+            );
+    }),
+  ],
+           
         ),
         body: Column(
           children: [
-            // 🔍 Filter & Sort
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
-                //spacing: 20,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // Category Filter
-                  DropdownButton<String>(
-                    value: selectedCategory,
-                    items: ["All", "Doors", "Statues", "Furniture", "Others"]
-                        .map((category) => DropdownMenuItem(
-                              value: category,
-                              child: Text(category,
-                                  style: TextStyle(color: Colors.white)),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedCategory = value!;
-                      });
-                    },
+                  Theme(
+                    data: Theme.of(context).copyWith(
+                      cardTheme: CardTheme(
+                        color: Color.fromARGB(255, 233, 156, 13),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(35)
+                        ),
+                      )
+                    ),
+                    child: DropdownButton<String>(
+                      value: selectedCategory,
+                      items: ["All", "Doors", "Statues", "Furniture", "Others"]
+                          .map((category) => DropdownMenuItem(
+                                value: category,
+                                child: Text(category,
+                                    style: TextStyle(color: Colors.white)),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedCategory = value!;
+                        });
+                      },
+                      icon: const Icon(Icons.arrow_drop_down),
+                      iconEnabledColor: Colors.white,
+                      iconDisabledColor: Colors.grey,
+                       dropdownColor: const Color.fromARGB(255, 34, 15, 11), 
+                      
+                    ),
                   ),
-                  // Sorting
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
@@ -179,13 +250,11 @@ class _ProductListingPageState extends State<ProductListingPage> {
                 ],
               ),
             ),
-            // 🛒 Product Grid
             Expanded(
               child: SingleChildScrollView(
-                // padding: const EdgeInsets.all(10),
                 child: Wrap(
-                  spacing: 10, // Space between items horizontally
-                  runSpacing: 10, // Space between items vertically
+                  spacing: 10, 
+                  runSpacing: 10, 
                   alignment: WrapAlignment.center,
                   children: filteredProducts.map((product) {
                     return IntrinsicWidth(
@@ -215,9 +284,17 @@ class _ProductListingPageState extends State<ProductListingPage> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: Stack(
+          children: [
+          
+          
+        Positioned(
+          right: 10,
+          bottom: 10,
+          
+          child:  FloatingActionButton(
           onPressed: () {
-            Get.to(() => CartPage());
+            Get.to(() => CartPageDesktop());
           },
           backgroundColor: Color.fromARGB(255, 233, 156, 13),
           child: Obx(() {
@@ -243,6 +320,9 @@ class _ProductListingPageState extends State<ProductListingPage> {
               ],
             );
           }),
+          ),
+        ),
+          ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       ),

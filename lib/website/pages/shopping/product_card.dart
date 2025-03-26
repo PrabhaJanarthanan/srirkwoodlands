@@ -29,8 +29,8 @@ class ProductCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
+            color: Colors.black.withAlpha(20),
+            blurRadius: 12,
             offset: const Offset(0, 4),
           ),
         ],
@@ -39,12 +39,27 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(imagePath, height: 150, fit: BoxFit.cover),
+          GestureDetector(
+            onTap: (){
+              showDialog(context: context, 
+              builder: (context) => Dialog(
+                backgroundColor: Colors.white,
+                child: InteractiveViewer(
+                  minScale: 1,
+                  maxScale: 5,
+                  
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Image.asset(imagePath, fit: BoxFit.contain),
+                  )),
+              ));
+            },
+            child: Image.asset(imagePath, height: 150, fit: BoxFit.cover)),
           const SizedBox(height: 10),
           Text(
             productName,
             style: const TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
+                fontWeight: FontWeight.normal, fontSize: 16, color: Colors.black),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 5),
