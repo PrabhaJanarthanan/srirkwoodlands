@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:profinix_app/website/pages/refundpolicy/refund_content.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class RefundMobile extends StatelessWidget {
   @override
@@ -18,41 +15,38 @@ class RefundMobile extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text(
+        title:  Text(
           "Back",
-          style: TextStyle(color: Colors.white),
+           style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/rkbackground.png'), fit: BoxFit.cover),
-        ),
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage('assets/rkbackground.png'), fit: BoxFit.cover),
+        // ),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(
                 maxWidth: 600), // Adjusted maxWidth for mobile view
             padding: const EdgeInsets.symmetric(
                 vertical: 40, horizontal: 20), // Reduced padding for mobile
-            child: const SingleChildScrollView(
+            child:  SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Refund Policy',
-                    style: TextStyle(
-                        fontSize: 18.0, // Further reduced font size for mobile
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   SizedBox(height: 10.0), // Adjusted spacing for mobile
-                  ProText(
-                    refundContent,
-                    style: TextStyle(
-                        fontSize: 14.0,
-                        color: Colors
-                            .white), // Further reduced font size for mobile
-                  ),
+                  // ProText(
+                  //   refundContent,
+                  //   style: TextStyle(
+                  //       fontSize: 14.0,
+                  //       color: Colors
+                  //           .white), // Further reduced font size for mobile
+                  // ),
                 ],
               ),
             ),

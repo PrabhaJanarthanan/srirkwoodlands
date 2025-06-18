@@ -14,8 +14,8 @@ class Page1 extends GetResponsiveView {
         scrollToContact: () {},
         scrollToFeatures: () {},
         scrollToHome: () {},
-        onNavItemTap: (index) {},
-        scaffoldKey: _scaffoldKey,
+        // onNavItemTap: (index) {},
+        // scaffoldKey: _scaffoldKey,
       );
 
   @override

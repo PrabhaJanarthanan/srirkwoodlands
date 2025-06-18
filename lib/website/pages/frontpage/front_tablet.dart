@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profinix_app/website/utils/constants.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class FrontTablet extends StatefulWidget {
   final VoidCallback scrollToContact;
@@ -102,7 +101,7 @@ class _FrontTabletState extends State<FrontTablet>
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const ProText(
+                        const Text(
                           "*Capture attention with personalized WhatsApp messages that cut through the clutter and engage your audience like never before. Our innovative marketing solutions ensure your message stands out, driving higher engagement and conversions.*",
                           style: TextStyle(
                             color: Colors.white,
@@ -114,7 +113,7 @@ class _FrontTabletState extends State<FrontTablet>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ProContainer(
+                            Container(
                               height: 40,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
@@ -146,7 +145,7 @@ class _FrontTabletState extends State<FrontTablet>
                                   Icons.arrow_downward_outlined,
                                   color: Colors.white,
                                 ),
-                                label: const ProText(
+                                label: const Text(
                                   'Get the App',
                                   style: TextStyle(
                                     color: Colors.white,

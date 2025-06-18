@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
+import 'package:profinix_app/website/utils/helpers/helper_functions.dart';
+
+import '../../controller/wishlist_controller.dart';
+import '../../utils/constants/colors.dart';
+import '../../utils/constants/sizes.dart';
 
 class ProductCard extends StatelessWidget {
   final String imagePath;
   final String productName;
+  final String productId;
   final double price;
   final VoidCallback onAddToCart;
 
@@ -12,6 +18,7 @@ class ProductCard extends StatelessWidget {
     Key? key,
     required this.imagePath,
     required this.productName,
+    required this.productId,
     required this.price,
     required this.onAddToCart,
   }) : super(key: key);
@@ -19,13 +26,17 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartController cartController = Get.put(CartController());
+    final WishlistController wishlistController = Get.put(WishlistController());
+
+
+    final dark = SNHelperFunctions.isDarkMode(context);
 
     return Container(
-      height: 300,
-      //width: 250,
+      height: 450,
+      width: 350,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: dark ? SNColors.black : Colors.white,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
@@ -36,14 +47,14 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
             onTap: (){
               showDialog(context: context, 
               builder: (context) => Dialog(
-                backgroundColor: Colors.white,
+                //backgroundColor: Colors.white,
                 child: InteractiveViewer(
                   minScale: 1,
                   maxScale: 5,
@@ -54,19 +65,80 @@ class ProductCard extends StatelessWidget {
                   )),
               ));
             },
-            child: Image.asset(imagePath, height: 150, fit: BoxFit.cover)),
+            child: Image.asset(imagePath, fit: BoxFit.cover)),
           const SizedBox(height: 10),
-          Text(
-            productName,
-            style: const TextStyle(
-                fontWeight: FontWeight.normal, fontSize: 16, color: Colors.black),
-            textAlign: TextAlign.center,
+
+
+          //Product name and add to cart button
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                productName,
+                style: Theme.of(context).textTheme.labelMedium,
+                    //overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(width: SNSizes.spaceBtwSections*2),
+              
+          Row(
+            children: [
+                  Obx(() {
+              final isInWishlist = wishlistController.isInWishlist(productId);
+              return IconButton(
+                onPressed: () {
+                  if (isInWishlist) {
+                    wishlistController.removeFromWishlist(productId);
+                  } else {
+                    wishlistController.addToWishlist({
+                      'id': productId,
+                      'imagePath': imagePath,
+                      'name': productName,
+                      'price': price,
+                    });
+                  }
+                },
+                icon: Icon(
+                  isInWishlist ? Icons.favorite : Icons.favorite_border,
+                  size: SNSizes.iconSm,
+                  color: isInWishlist ? Colors.red : (dark ? SNColors.white : SNColors.black),
+                ),
+              );
+            }),
+
+              IconButton(
+                onPressed: () {
+                  cartController.addItemToCart({
+                    'imagePath': imagePath,
+                    'name': productName,
+                    'price': price,
+                    'quantity': 1,
+                    'category': 'default',
+                  });
+                },
+                      
+                icon:Icon(Icons.add_shopping_cart, 
+                size: SNSizes.iconSm,
+                color: dark ? SNColors.white : SNColors.black, 
+                ),
+                     
+              ),
+            ],
           ),
-          const SizedBox(height: 5),
+      ],
+          ),
+         // const SizedBox(height: 5),
+
+          //Price
+
           Text('₹${price.toStringAsFixed(2)}',
-              style: const TextStyle(fontSize: 16, color: Colors.green)),
-          const SizedBox(height: 10),
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: dark? SNColors.buttonPrimary:SNColors.black
+              ),),
+
+         // const SizedBox(height: 10),
           Obx(() {
+
+            
             var currentItem = cartController.cartItems.firstWhere(
                 (item) => item['name'] == productName,
                 orElse: () => {});
@@ -76,55 +148,11 @@ class ProductCard extends StatelessWidget {
             return const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // IconButton(
-                //   icon: Icon(Icons.remove,
-                //       size: 20,
-                //       color: quantity > 0 ? Colors.black : Colors.grey),
-                //   onPressed: quantity > 0
-                //       ? () {
-                //           cartController.decrementItemQuantity({
-                //             'name': productName,
-                //             'price': price,
-                //             'imagePath': imagePath,
-                //             'category': 'default',
-                //           });
-                //         }
-                //       : null,
-                // ),
-                // Text('$quantity', style: const TextStyle(fontSize: 16)),
-                // IconButton(
-                //   icon: Icon(Icons.add, size: 20, color: Colors.black),
-                //   onPressed: () {
-                //     cartController.incrementItemQuantity({
-                //       'name': productName,
-                //       'price': price,
-                //       'imagePath': imagePath,
-                //       'category': 'default',
-                //     });
-                //   },
-                // ),
+                
               ],
             );
           }),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              cartController.addItemToCart({
-                'imagePath': imagePath,
-                'name': productName,
-                'price': price,
-                'quantity': 1,
-                'category': 'default',
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 233, 156, 13),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            child: const Text('Add to Cart',
-                style: TextStyle(color: Colors.white)),
-          ),
+       
         ],
       ),
     );

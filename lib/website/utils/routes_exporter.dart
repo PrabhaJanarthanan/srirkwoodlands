@@ -12,24 +12,10 @@ export 'package:profinix_app/website/pages/frontpage/front_desktop.dart';
 export 'package:profinix_app/website/pages/frontpage/front_tablet.dart';
 
 export 'package:profinix_app/website/pages/homepage/homepage.dart';
-export 'package:profinix_app/website/pages/features/features.dart';
-export 'package:profinix_app/website/pages/features/features_desktop.dart';
-export 'package:profinix_app/website/pages/features/features_mobile.dart';
-export 'package:profinix_app/website/pages/features/features_tablet.dart';
-export 'package:profinix_app/website/pages/mainfeatures/mainfeatures.dart';
-export 'package:profinix_app/website/pages/mainfeatures/mainfeatures_desktop.dart';
-export 'package:profinix_app/website/pages/mainfeatures/mainfeatures_mobile.dart';
+
 export 'package:profinix_app/website/pages/pricing/pricing.dart';
 export 'package:profinix_app/website/pages/privacypolicy/privacypolicy_content.dart';
 export 'package:profinix_app/website/pages/termsandconditions/termsandconditions.dart';
-export 'package:profinix_app/website/pages/whychoose/whychoose.dart';
-export 'package:profinix_app/website/pages/whychoose/whychoose_desktop.dart';
-export 'package:profinix_app/website/pages/whychoose/whychoose_mobile.dart';
-export 'package:profinix_app/website/pages/whychoose/whychoose_tablet.dart';
-export 'package:profinix_app/website/pages/woodtype/woodtype.dart';
-export 'package:profinix_app/website/pages/woodtype/woodtype_desktop.dart';
-export 'package:profinix_app/website/pages/woodtype/woodtype_mobile.dart';
-export 'package:profinix_app/website/pages/woodtype/woodtype_tablet.dart';
-export 'package:profinix_app/website/pages/mainfeatures/mainfeatures_contents.dart';
+
 
 export 'package:profinix_app/website/widgets/navbar/navbar.dart';

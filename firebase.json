@@ -13,6 +13,7 @@
   },
   "hosting": {
     "public": "build/web",
+    "site": "srinivi-agentiq",
     "ignore": [
       "firebase.json",
       "**/.*",

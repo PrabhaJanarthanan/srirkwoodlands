@@ -4,31 +4,36 @@ import 'package:profinix_app/website/controller/auth_controller.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
 import 'package:profinix_app/website/pages/shopping/checkout/checkout_desktop.dart';
 
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_functions.dart';
+
 class CartPageDesktop extends StatelessWidget {
   final CartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    final dark = SNHelperFunctions.isDarkMode(context);
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: const AssetImage('assets/rkbackgroundbrown.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   image: DecorationImage(
+      //     image: const AssetImage('assets/rkbackgroundbrown.png'),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+       // backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text(
+          title:  Text(
             'Your Cart',
-            style: TextStyle(color: Colors.white),
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
-           iconTheme: const IconThemeData(color: Colors.white), 
-          backgroundColor: Colors.transparent,
+           iconTheme:  IconThemeData(color: dark?SNColors.white : SNColors.blackContainer), 
+         // backgroundColor: Colors.transparent,
           actions: [
                 // Home Button before user icon
     IconButton(
-      icon: const Icon(Icons.home, color: Colors.white),
+      icon:  Icon(Icons.home, color: dark?SNColors.white : SNColors.blackContainer),
       onPressed: () {
         // Navigate to Home page when tapped
         Get.toNamed('/home'); // Update with your home route if needed
@@ -47,7 +52,7 @@ class CartPageDesktop extends StatelessWidget {
                             middleText: "Are you sure you want to logout?",
                             textConfirm: "Logout",
                             textCancel: "Cancel",
-                            confirmTextColor: Colors.white,
+                            confirmTextColor: dark?SNColors.white : SNColors.blackContainer,
                             buttonColor: Colors.red,
                             onConfirm: () {
                               AuthController.instance.signOut();
@@ -60,7 +65,7 @@ class CartPageDesktop extends StatelessWidget {
                       ? NetworkImage(user.photoURL!)
                       : null, // Display user photo if available
                   child: user.photoURL == null
-                      ? Icon(Icons.person, size: 20, color: Colors.white)
+                      ? Icon(Icons.person, size: 20, color: dark?SNColors.white : SNColors.blackContainer)
                       : null, // Default icon if no photo
                         //  child:
                               //Icon(Icons.person, size: 20, color: Colors.white),
@@ -68,7 +73,7 @@ class CartPageDesktop extends StatelessWidget {
                       ),
                     )
                   : IconButton(
-                      icon: Icon(Icons.login_sharp, color: Colors.white),
+                      icon: Icon(Icons.login_sharp, color: dark?SNColors.white : SNColors.blackContainer),
                       onPressed: () async {
                         bool isLoggedIn =
                             await AuthController.instance.signInWithGoogle();
@@ -107,25 +112,24 @@ class CartPageDesktop extends StatelessWidget {
                                     width: 30, height: 30, fit: BoxFit.cover),
                                 title: Text(
                                   item['name'],
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 20),
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: dark?SNColors.white : SNColors.blackContainer
+                                  )
                                 ),
                                 subtitle: Row(
                                   children: [
                                     const SizedBox(width: 10),
                                     Text(
                                       '₹${item['price']} x ',
-                                      style: const TextStyle(
-                                          fontSize: 16, color: Colors.white60),
+                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: dark?SNColors.white : SNColors.blackContainer
+                                  )
                                     ),
                                     Text(
                                       '${item['quantity']}',
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.white60,
-                                          fontWeight: FontWeight.bold),
+                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: dark?SNColors.white : SNColors.blackContainer
+                                  )
                                     ),
                                   ],
                                 ),
@@ -134,8 +138,9 @@ class CartPageDesktop extends StatelessWidget {
                                   children: [
                                     // Decrease Button
                                     IconButton(
-                                      icon: const Icon(Icons.remove,
-                                          color: Colors.white),
+                                      icon:  Icon(Icons.remove,
+                                      size: SNSizes.iconSm,
+                                          color: dark?SNColors.white : SNColors.blackContainer),
                                       onPressed: item['quantity'] > 1
                                           ? () {
                                               cartController
@@ -146,17 +151,16 @@ class CartPageDesktop extends StatelessWidget {
                                     // Price with quantity
                                     Text(
                                       '₹${(item['quantity'] * item['price']).toStringAsFixed(2)}',
-                                      style: const TextStyle(
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
+                                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: dark?SNColors.white : SNColors.blackContainer
+                                  )
                                     ),
                                     // Increase Button
                                     IconButton(
-                                      icon: const Icon(
+                                      icon:  Icon(
                                         Icons.add,
-                                        color: Colors.white,
+                                        size: SNSizes.iconSm,
+                                        color: dark?SNColors.white : SNColors.blackContainer
                                       ),
                                       onPressed: () {
                                         cartController
@@ -165,8 +169,9 @@ class CartPageDesktop extends StatelessWidget {
                                     ),
                                     // Delete Button
                                     IconButton(
-                                      icon: const Icon(Icons.delete,
-                                          color: Colors.red),
+                                      icon:  Icon(Icons.delete,
+                                          color: Colors.red,
+                                          size: SNSizes.iconSm,),
                                       onPressed: () {
                                         cartController.removeItemFromCart(item);
                                       },
@@ -178,9 +183,9 @@ class CartPageDesktop extends StatelessWidget {
                           );
                   }),
                 ),
-                const Divider(
+                 Divider(
                   // Added Divider
-                  color: Colors.white,
+                  color:  dark?SNColors.white : SNColors.blackContainer,
                   thickness: 1,
                   indent: 20,
                   endIndent: 20,
@@ -194,10 +199,9 @@ class CartPageDesktop extends StatelessWidget {
                       Obx(() {
                         return Text(
                           'Total: ₹${cartController.totalPrice.value.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal),
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: dark?SNColors.white : SNColors.blackContainer
+                                  )
                         );
                       }),
                     ],
@@ -247,9 +251,9 @@ class CartPageDesktop extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                child: const Text(
+                child:  Text(
                   'Checkout',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               )
 

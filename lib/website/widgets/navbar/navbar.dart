@@ -26,7 +26,7 @@ class NavBar extends GetResponsiveView {
         scrollToFeatures: scrollToFeatures,
         scrollToHome: scrollToHome,
         onNavItemTap: onNavItemTap,
-        scaffoldKey: scaffoldKey, // Pass the scaffoldKey to MobileNavBar
+        //scaffoldKey: scaffoldKey, // Pass the scaffoldKey to MobileNavBar
       );
 
   @override

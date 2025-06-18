@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:profinix_app/website/pages/privacypolicy/privacycontent.dart';
-import 'package:profinix_app/website/pages/refundpolicy/refund_content.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class RefundDesktop extends StatelessWidget {
   @override
@@ -25,11 +21,11 @@ class RefundDesktop extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/rkbackgroundbrown.png'),
-              fit: BoxFit.cover),
-        ),
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage('assets/rkbackgroundbrown.png'),
+        //       fit: BoxFit.cover),
+        // ),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(
@@ -40,7 +36,7 @@ class RefundDesktop extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Refund Policy',
                     style: TextStyle(
                         fontSize: 24.0,
@@ -48,10 +44,10 @@ class RefundDesktop extends StatelessWidget {
                         color: Colors.white),
                   ),
                   SizedBox(height: 20.0),
-                  ProText(
-                    refundContent,
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
+                  // ProText(
+                  //   refundContent,
+                  //   style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  // ),
                 ],
               ),
             ),

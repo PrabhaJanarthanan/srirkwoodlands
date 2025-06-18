@@ -7,7 +7,7 @@ class AppbarAvtar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("Sri RK Woodlands"),
+      title: const Text("Sri Nivi Boutique"),
       centerTitle: true, // Ensures the title is centered on all devices
       actions: [
         Obx(() {

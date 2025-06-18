@@ -1,37 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:profinix_app/website/pages/termsandconditions/terms_content.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
+
+import '../../utils/constants/colors.dart';
+import '../../utils/helpers/helper_functions.dart';
 
 class TermsMobile extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+    final dark = SNHelperFunctions.isDarkMode(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon:  Icon(Icons.arrow_back,color: dark? SNColors.white : SNColors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: const ProText(
+        title:  Text(
           'Back',
-          style: TextStyle(color: Colors.white, fontSize: 14),
+            style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
       body: Stack(
         children: [
-          Positioned.fill(
+         Positioned.fill(
             child: Image.asset(
-              'assets/rkbackground.png',
+              Theme.of(context).brightness == Brightness.dark
+              ?'assets/background/srinivibackgrounddark.png'
+              : 'assets/background/srinivibackgroundlight.png',
               fit: BoxFit.cover,
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(20),
             child: SingleChildScrollView(
               padding: EdgeInsets.all(20.0),
@@ -41,22 +45,19 @@ class TermsMobile extends StatelessWidget {
                   children: [
                     SizedBox(height: 10.0),
                     Center(
-                      child: ProText(
+                      child: Text(
                         'Terms and Conditions',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.white),
+                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                     ),
                     SizedBox(height: 10.0),
-                    ProText(
-                      termsAndConditionsContent,
-                      style: TextStyle(
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white),
-                    ),
+                    // ProText(
+                    //   termsAndConditionsContent,
+                    //   style: TextStyle(
+                    //       fontSize: 14.0,
+                    //       fontWeight: FontWeight.normal,
+                    //       color: Colors.white),
+                    // ),
                   ],
                 ),
               ),
@@ -64,17 +65,17 @@ class TermsMobile extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed('/'); // Navigate to Home Page
-        },
-        child: const Icon(
-          Icons.home,
-          color: Colors.white,
-        ),
-        backgroundColor:
-            Color.fromARGB(255, 233, 156, 13), // Customize as needed
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Get.toNamed('/'); // Navigate to Home Page
+      //   },
+      //   child: const Icon(
+      //     Icons.home,
+      //     color: Colors.white,
+      //   ),
+      //   backgroundColor:
+      //       Color.fromARGB(255, 233, 156, 13), // Customize as needed
+      // ),
     );
   }
 }

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profinix_app/website/pages/shopping/cartcontroller.dart';
 import 'package:profinix_app/website/pages/shopping/order_confirmation/orderconfirmation_desktop.dart';
+import 'package:profinix_app/website/utils/constants/sizes.dart';
+import 'package:profinix_app/website/utils/helpers/helper_functions.dart';
 
 import '../../../controller/auth_controller.dart';
+import '../../../utils/constants/colors.dart';
 
 class CheckoutDesktop extends StatelessWidget {
   final CartController cartController = Get.find();
@@ -21,24 +24,25 @@ class CheckoutDesktop extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final dark = SNHelperFunctions.isDarkMode(context);
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/rkbackgroundbrown.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
+      // decoration: const BoxDecoration(
+      //   image: DecorationImage(
+      //     image: AssetImage('assets/rkbackgroundbrown.png'),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+      //  backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text('Checkout Page',
-              style: TextStyle(color: Colors.white)),
+          title:  Text('Checkout Page',
+              style: Theme.of(context).textTheme.headlineSmall),
               centerTitle: true,
-               iconTheme: const IconThemeData(color: Colors.white), 
+               iconTheme:  IconThemeData(color: dark? SNColors.white : SNColors.black), 
                actions: [
     // Home Button before user icon
     IconButton(
-      icon: const Icon(Icons.home, color: Colors.white),
+      icon:  Icon(Icons.home, color: dark? SNColors.white : SNColors.black),
       onPressed: () {
         // Navigate to Home page when tapped
         Get.toNamed('/home'); // Update with your home route if needed
@@ -71,14 +75,16 @@ class CheckoutDesktop extends StatelessWidget {
                       ? NetworkImage(user.photoURL!)
                       : null, // Display user photo if available
                   child: user.photoURL == null
-                      ? Icon(Icons.person, size: 20, color: Colors.white)
+                      ? Icon(Icons.person, 
+                      size: SNSizes.iconSm, 
+                      color: dark ? SNColors.white : SNColors.black)
                       : null, // Default icon if no photo
                  // child: Icon(Icons.person, size: 20, color: Colors.white),
                 ),
               ),
             )
           : IconButton(
-              icon: Icon(Icons.login_sharp, color: Colors.white),
+              icon: Icon(Icons.login_sharp, color: dark ? SNColors.white : SNColors.black),
               onPressed: () async {
                 bool isLoggedIn = await AuthController.instance.signInWithGoogle();
                 if (isLoggedIn) {
@@ -116,21 +122,19 @@ class CheckoutDesktop extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Billing Details',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
+                     Text('Billing Details',
+                     style: Theme.of(context).textTheme.headlineSmall
+                        ),
                     const SizedBox(height: 15),
                     Row(
                       children: [
                         Expanded(
                           child: TextFormField(
                             controller: firstNameController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            style: Theme.of(context).textTheme.labelMedium,
+                            decoration:  InputDecoration(
                               labelText: 'Name *',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle: Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -148,10 +152,10 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: emailController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            style: Theme.of(context).textTheme.labelMedium,
+                            decoration:  InputDecoration(
                               labelText: 'Email *',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle: Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -177,10 +181,10 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: businessNameController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            style: Theme.of(context).textTheme.labelMedium,
+                            decoration:  InputDecoration(
                               labelText: 'Business Name (Optional)',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle:  Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -192,10 +196,10 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: gstNumberController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            style: Theme.of(context).textTheme.labelMedium,
+                            decoration:  InputDecoration(
                                 labelText: 'GST Number (Optional)',
-                                labelStyle: TextStyle(color: Colors.white),
+                                labelStyle:  Theme.of(context).textTheme.labelMedium,
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)))),
@@ -208,10 +212,10 @@ class CheckoutDesktop extends StatelessWidget {
                       children: [
                         TextFormField(
                           controller: addressLine1Controller,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
+                         style: Theme.of(context).textTheme.labelMedium,
+                          decoration:  InputDecoration(
                             labelText: 'Address Line 1 *',
-                            labelStyle: TextStyle(color: Colors.white),
+                            labelStyle:  Theme.of(context).textTheme.labelMedium,
                             border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -232,10 +236,10 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: countryController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            style: Theme.of(context).textTheme.labelMedium,
+                            decoration:  InputDecoration(
                               labelText: 'Country *',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle:  Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -253,10 +257,10 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: stateController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
+                            style: Theme.of(context).textTheme.labelMedium,
+                            decoration:  InputDecoration(
                               labelText: 'State *',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle: Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -278,11 +282,11 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: phoneController,
-                            style: const TextStyle(color: Colors.white),
+                            style: Theme.of(context).textTheme.labelMedium,
                             keyboardType: TextInputType.phone,
-                            decoration: const InputDecoration(
+                            decoration:  InputDecoration(
                               labelText: 'Phone Number (+Country Code) *',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle:  Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -307,11 +311,11 @@ class CheckoutDesktop extends StatelessWidget {
                         Expanded(
                           child: TextFormField(
                             controller: pincodeController,
-                            style: const TextStyle(color: Colors.white),
+                            style: Theme.of(context).textTheme.labelMedium,
                             keyboardType: TextInputType.number,
-                            decoration: const InputDecoration(
+                            decoration:  InputDecoration(
                               labelText: 'Postal Code *',
-                              labelStyle: TextStyle(color: Colors.white),
+                              labelStyle:Theme.of(context).textTheme.labelMedium,
                               border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
@@ -336,10 +340,7 @@ class CheckoutDesktop extends StatelessWidget {
                         Obx(() {
                           return Text(
                               'Total: ₹${cartController.totalPrice.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.normal));
+                              style: Theme.of(context).textTheme.headlineSmall);
                         }),
                       ],
                     ),
@@ -352,7 +353,7 @@ class CheckoutDesktop extends StatelessWidget {
                             'Error',
                             'Please fill in all Mandatory fields',
                             backgroundColor: Colors.red,
-                            colorText: Colors.white,
+                            colorText: dark ? SNColors.white : SNColors.black,
                           );
                           return;
                         }
@@ -379,9 +380,9 @@ class CheckoutDesktop extends StatelessWidget {
                         backgroundColor: Color.fromARGB(255, 233, 156, 13),
                         minimumSize: const Size(double.infinity, 50),
                       ),
-                      child: const Text(
+                      child:  Text(
                         'Proceed to Confirmation',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: Theme.of(context).textTheme.headlineSmall
                       ),
                     ),
                   ],

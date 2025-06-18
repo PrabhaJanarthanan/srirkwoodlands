@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/pages/refundpolicy/refund_content.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
-import 'shipanddelivery_content.dart';
 
 class ShippingDesktop extends StatelessWidget {
   @override
@@ -25,11 +22,11 @@ class ShippingDesktop extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/rkbackgroundbrown.png'),
-              fit: BoxFit.cover),
-        ),
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage('assets/rkbackgroundbrown.png'),
+        //       fit: BoxFit.cover),
+        // ),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(
@@ -40,7 +37,7 @@ class ShippingDesktop extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Shipping and Delivery Policy',
                     style: TextStyle(
                         fontSize: 24.0,
@@ -48,10 +45,10 @@ class ShippingDesktop extends StatelessWidget {
                         color: Colors.white),
                   ),
                   SizedBox(height: 20.0),
-                  ProText(
-                    shippingAndDelivery,
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ),
+                  // ProText(
+                  //   shippingAndDelivery,
+                  //   style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  // ),
                 ],
               ),
             ),

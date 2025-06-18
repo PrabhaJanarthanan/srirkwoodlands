@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 import 'package:profinix_app/website/widgets/navbar/mobile_navbar.dart';
 
 class PricingMobile extends StatefulWidget {
@@ -52,7 +51,7 @@ class _PricingMobileState extends State<PricingMobile> {
         scrollToFeatures: _navigateToMainfeatures,
         scrollToHome: _navigateToHome,
         onNavItemTap: _onNavItemTap,
-        scaffoldKey: _scaffoldKey,
+        //scaffoldKey: _scaffoldKey,
       ),
       body: Stack(
         children: [
@@ -67,7 +66,7 @@ class _PricingMobileState extends State<PricingMobile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const ProText(
+                const Text(
                   '"Experience seamless communication with our affordable and flexible pricing plans!"',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -77,7 +76,7 @@ class _PricingMobileState extends State<PricingMobile> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const ProText(
+                const Text(
                   "Choose the right plan for your business. Whether you need direct agent communication, CRM services, or professional support, we have a flexible pricing model tailored to your needs. Explore the options below!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -110,7 +109,7 @@ class _PricingMobileState extends State<PricingMobile> {
       ];
 
   List<Widget> _buildPricingDescriptions() => [
-        const ProText(
+        const Text(
           "1. *Agent Direct Plans*: Get the flexibility of managing communication directly with agents. Choose between CRM and Business Services based on your specific needs.",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -120,7 +119,7 @@ class _PricingMobileState extends State<PricingMobile> {
           ),
         ),
         const SizedBox(height: 10),
-        const ProText(
+        const Text(
           "2. *Customer Direct Plans*: Empower your customers to engage with your services directly through CRM or Business Services, designed for a streamlined experience.",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -130,7 +129,7 @@ class _PricingMobileState extends State<PricingMobile> {
           ),
         ),
         const SizedBox(height: 10),
-        const ProText(
+        const Text(
           "3. *Pro Services*: Unlock advanced features that come with professional services to take your communication to the next level with customized CRM and Business Services.",
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -140,7 +139,7 @@ class _PricingMobileState extends State<PricingMobile> {
           ),
         ),
         const SizedBox(height: 10),
-        const ProText(
+        const Text(
           "4. *Agent Service Plans*: Ideal for agencies that need a comprehensive solution for CRM and Business Services. Your agents can easily manage customer interactions and business needs.",
           textAlign: TextAlign.center,
           style: TextStyle(

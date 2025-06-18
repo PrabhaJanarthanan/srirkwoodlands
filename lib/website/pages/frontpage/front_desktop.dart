@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/utils/constants.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
+
+import '../../utils/helpers/helper_functions.dart';
 
 class FrontDesktop extends StatefulWidget {
   final VoidCallback scrollToContact;
@@ -61,7 +61,7 @@ class _FrontDesktopState extends State<FrontDesktop>
           child: Container(),
         ),
         Container(
-          height: 410,
+          height: 200, // Increased height to fit image circles
           margin:
               EdgeInsets.symmetric(horizontal: screenWidth / 10, vertical: 20),
           child: Row(
@@ -72,103 +72,37 @@ class _FrontDesktopState extends State<FrontDesktop>
                   child: Container(
                     padding: const EdgeInsets.only(bottom: 20.0),
                     child: Column(
-                      spacing: 30,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Fading Animation for the Heading
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: ShaderMask(
-                              shaderCallback: (bounds) => const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 250, 249, 248),
-                                  Colors.white,
-                                ],
-                                begin: Alignment.bottomLeft,
-                                end: Alignment.topRight,
-                              ).createShader(bounds),
-                              child: const Text(
-                                "Where craftsmanship meets elegance. \nWoodwork that lasts a lifetime.",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.3,
-                                ),
-                              ),
+                   
+                    
+             
+                        const SizedBox(height: 50),
+
+                        // Saree Type Circles
+                        Wrap(
+                          spacing: 30,
+                          runSpacing: 30,
+                          alignment: WrapAlignment.center,
+                          children: [
+                            buildSareeCircle(
+                              'assets/sarees/kalamkarisaree.png',
+                              'Shop Cotton Sarees',
                             ),
-                          ),
-                        ),
-                        // Fade Animation for the Second Text
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            children: [
-                              FadeTransition(
-                                opacity: _fadeAnimation,
-                                child: const Text(
-                                  "At Sri RK Woodlands, we specialize in crafting the finest wooden products that blend timeless elegance with durability. Whether you’re furnishing your home or office, our expertly crafted wood items ensure a touch of sophistication in every space. Discover our wide range of products designed to elevate your surroundings with natural beauty and strength.",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              const SizedBox(height: 25),
-                              Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ProContainer(
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        gradient: const LinearGradient(
-                                          colors: [
-                                            Color.fromARGB(255, 233, 156, 13),
-                                            Color.fromARGB(255, 245, 208, 85),
-                                          ],
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                        ),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: ElevatedButton.icon(
-                                        style: ElevatedButton.styleFrom(
-                                          foregroundColor: Colors.white,
-                                          backgroundColor: Colors.transparent,
-                                          shadowColor: Colors.transparent,
-                                          textStyle:
-                                              const TextStyle(fontSize: 16),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Get.toNamed('/shopping');
-                                        },
-                                        icon: const Icon(
-                                          Icons.shopping_bag,
-                                          color: Colors.white,
-                                        ),
-                                        label: const ProText(
-                                          'Shop Now',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.normal),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            buildSareeCircle(
+                              'assets/sarees/cottonsaree.png',
+                              'Shop Designer Sarees',
+                            ),
+                            buildSareeCircle(
+                              'assets/sarees/fancysaree.png',
+                              'Shop Fancy Sarees',
+                            ),
+                            buildSareeCircle(
+                              'assets/sarees/banarasisaree.png',
+                              'Shop Semi Banarasi',
+                            ),
+                           
+                          ],
                         ),
                       ],
                     ),
@@ -177,6 +111,33 @@ class _FrontDesktopState extends State<FrontDesktop>
               ),
             ],
           ),
+        ),
+      ],
+    );
+  }
+
+  /// Circle image with label below
+  Widget buildSareeCircle(String imagePath, String label) {
+    final dark = SNHelperFunctions.isDarkMode(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: dark? Colors.white : Colors.black, width: 2),
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+         
         ),
       ],
     );

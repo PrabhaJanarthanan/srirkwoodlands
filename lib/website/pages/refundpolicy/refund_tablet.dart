@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:profinix_app/website/pages/refundpolicy/refund_content.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class RefundTablet extends StatelessWidget {
   @override
@@ -24,11 +21,11 @@ class RefundTablet extends StatelessWidget {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/background/frontbg.png'),
-              fit: BoxFit.cover),
-        ),
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage('assets/background/frontbg.png'),
+        //       fit: BoxFit.cover),
+        // ),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(
@@ -39,7 +36,7 @@ class RefundTablet extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Refund Policy',
                     style: TextStyle(
                         fontSize: 22.0, // Reduced font size for tablet
@@ -47,12 +44,12 @@ class RefundTablet extends StatelessWidget {
                         color: Colors.white),
                   ),
                   SizedBox(height: 15.0), // Adjusted spacing for tablet
-                  ProText(
-                    refundContent,
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white), // Reduced font size slightly
-                  ),
+                  // ProText(
+                  //   refundContent,
+                  //   style: TextStyle(
+                  //       fontSize: 15.0,
+                  //       color: Colors.white), // Reduced font size slightly
+                  // ),
                 ],
               ),
             ),

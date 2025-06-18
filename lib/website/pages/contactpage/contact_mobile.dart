@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profinix_app/website/utils/constants.dart';
 import 'package:profinix_app/website/utils/snslinks.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class ContactPageMobile extends StatelessWidget {
   const ContactPageMobile({Key? key}) : super(key: key);

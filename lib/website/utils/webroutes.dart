@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:profinix_app/website/pages/collections/bridal/bridal_collections_desktop.dart';
+import 'package:profinix_app/website/pages/collections/bridal/bridal_collections_mobile.dart';
 import 'package:profinix_app/website/pages/contactpage/contactpagedesktop.dart';
 import 'package:profinix_app/website/pages/contactpage/pricing_contact_page.dart';
 import 'package:profinix_app/website/pages/featurespage/featurespage.dart';
 import 'package:profinix_app/website/pages/frontpage/front_mobile.dart';
 import 'package:profinix_app/website/pages/loginpage/login_desktop.dart';
 import 'package:profinix_app/website/pages/loginpage/signup_desktop.dart';
-import 'package:profinix_app/website/pages/mainfeatures/mainfeatures_tablet.dart';
 import 'package:profinix_app/website/pages/refundpolicy/refund.dart';
 import 'package:profinix_app/website/pages/shippinganddelivery/shipping_desktop.dart';
 import 'package:profinix_app/website/pages/shopping/product_listing/product_listing.dart';
 import 'package:profinix_app/website/pages/shopping/product_listing/product_listing_mobile.dart';
 import 'package:profinix_app/website/pages/shopping/product_listing/product_listing_desktop.dart';
+import '../pages/shopping/cart/wishlist.dart';
 import 'routes_exporter.dart';
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -31,14 +33,7 @@ final List<GetPage> webroutes = [
           )),
 
   GetPage(name: '/page1', page: () => Page1()),
-  GetPage(name: '/page2', page: () => Features()),
-  GetPage(name: '/page3', page: () => WhyWhatsapp()),
-  GetPage(
-      name: '/mainfeatures',
-      page: () => MainFeatures(
-            feature: mainFeaturesUtils[0],
-          )),
-  GetPage(name: '/worldwide', page: () => Worldwide()),
+  
   GetPage(name: '/contactpage', page: () => ContactPage()),
   GetPage(name: '/contactUs', page: () => ContactUs()),
   GetPage(name: '/footer', page: () => Footer()),
@@ -58,28 +53,12 @@ final List<GetPage> webroutes = [
             scrollToContact: () {},
             scrollToFeatures: () {},
             scrollToHome: () {},
-            onNavItemTap: (index) {},
-            scaffoldKey: _scaffoldKey,
+            // onNavItemTap: (index) {},
+            // scaffoldKey: _scaffoldKey,
           )),
   // GetPage(name: '/page1tablet', page: () => const FrontTablet()),
-  GetPage(name: '/page2desktop', page: () => FeaturesDesktop()),
-  GetPage(name: '/page2mobile', page: () => FeaturesMobile()),
-  GetPage(name: '/page2tablet', page: () => FeaturesTablet()),
-  GetPage(name: '/page3desktop', page: () => const WhywhatsappDesktop()),
-  GetPage(name: '/page3mobile', page: () => const WhywhatsappMobile()),
-  GetPage(name: '/page3tablet', page: () => WhywhatsappTablet()),
-  GetPage(
-      name: '/mainfeaturesdesktop',
-      page: () => MainfeaturesDesktop(feature: mainFeaturesUtils[0])),
-  GetPage(
-      name: '/mainfeaturesmobile',
-      page: () => MainfeaturesMobile(feature: mainFeaturesUtils[0])),
-  GetPage(
-      name: '/mainfeaturestablet',
-      page: () => MainfeaturesTablet(feature: mainFeaturesUtils[0])),
-  GetPage(name: '/worldwidedesktop', page: () => const WorldwideDesktop()),
-  GetPage(name: '/worldwidemobile', page: () => const WorldwideMobile()),
-  GetPage(name: '/worldwidetablet', page: () => const WorldwideTablet()),
+ 
+ 
   GetPage(name: '/contactdesktop', page: () => const ContactPageDesktop()),
   GetPage(name: '/contactmobile', page: () => const ContactPageMobile()),
   GetPage(name: '/contactdesktop', page: () => const ContactPageTablet()),
@@ -91,6 +70,9 @@ final List<GetPage> webroutes = [
 
    GetPage(name: '/shoppingdesktop', page: () => ProductListingDesktop()),
    GetPage(name: '/shoppingmobile', page: () => ProductListingMobile()),
+
+   //Wislist
+  GetPage(name: '/wishlist', page: () => WishlistScreen()),
   GetPage(name: '/features', page: () => FeaturesPage()),
   //about pages
   GetPage(name: '/termsandconditions', page: () => TermsandConditions()),
@@ -98,4 +80,9 @@ final List<GetPage> webroutes = [
   GetPage(name: '/returnsandrefund', page: () => RefundPage()),
   GetPage(name: '/pricingcontactpage', page: () => const PricingContactPage()),
   GetPage(name: '/shippinganddelivery', page: () => ShippingDesktop()),
+
+  //Collections
+    GetPage(name: '/bridalCollections', page: () => const BridalCollectionsDesktop()),
+    GetPage(name: '/bridalCollectionsmobile', page: () => const BridalCollectionsMobile(),
+    ),
 ];

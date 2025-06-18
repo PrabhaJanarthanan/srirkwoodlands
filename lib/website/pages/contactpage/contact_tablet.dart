@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:profinix_app/website/utils/constants.dart';
 import 'package:profinix_app/website/utils/snslinks.dart';
 import 'dart:js' as js;
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class ContactPageTablet extends StatelessWidget {
   const ContactPageTablet({Key? key}) : super(key: key);

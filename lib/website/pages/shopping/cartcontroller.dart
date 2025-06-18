@@ -21,6 +21,11 @@ class CartController extends GetxController {
     isLoading.value = false;
   }
 */
+
+  void clearCart() {
+  cartItems.clear();
+  update(); // or use refresh() if you're using RxList
+}
   void updateTotalPrice() {
     totalPrice.value = cartItems.fold(0.0, (sum, item) {
       return sum + (item['price'] * item['quantity']);

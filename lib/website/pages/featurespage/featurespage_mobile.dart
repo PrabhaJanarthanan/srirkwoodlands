@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:profinix_app/app/presentationLayer/baseWidgets/base_widgets.dart';
 import 'package:profinix_app/website/pages/featurespage/featurespage_content.dart';
 
 class FeaturesPageMobile extends StatelessWidget {

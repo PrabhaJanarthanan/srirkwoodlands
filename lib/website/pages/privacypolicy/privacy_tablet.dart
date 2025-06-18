@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:profinix_app/website/pages/privacypolicy/privacycontent.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class PrivacyPolicyTablet extends StatelessWidget {
   @override
@@ -18,7 +15,7 @@ class PrivacyPolicyTablet extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: const ProText(
+        title: const Text(
           'Back',
           style: TextStyle(color: Colors.white),
         ),
@@ -39,7 +36,7 @@ class PrivacyPolicyTablet extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Privacy Policy',
                     style: TextStyle(
                         fontSize: 22.0, // Reduced font size slightly
@@ -47,12 +44,12 @@ class PrivacyPolicyTablet extends StatelessWidget {
                         color: Colors.white),
                   ),
                   SizedBox(height: 15.0), // Adjusted spacing
-                  ProText(
-                    privacypolicycontent,
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white), // Reduced font size slightly
-                  ),
+                  // ProText(
+                  //   privacypolicycontent,
+                  //   style: TextStyle(
+                  //       fontSize: 15.0,
+                  //       color: Colors.white), // Reduced font size slightly
+                  // ),
                 ],
               ),
             ),

@@ -1,143 +1,137 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/utils/constants.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
-class FrontMobile extends GetResponsiveView {
+import '../../utils/helpers/helper_functions.dart';
+
+class FrontMobile extends StatefulWidget {
   final VoidCallback scrollToContact;
   final VoidCallback scrollToFeatures;
   final VoidCallback scrollToHome;
-  final GlobalKey<ScaffoldState> scaffoldKey; // Changed type
-  final Function(int) onNavItemTap;
 
   FrontMobile({
     Key? key,
     required this.scrollToContact,
     required this.scrollToFeatures,
     required this.scrollToHome,
-    required this.onNavItemTap,
-    required this.scaffoldKey,
   }) : super(key: key);
 
   @override
+  _FrontMobileState createState() => _FrontMobileState();
+}
+
+class _FrontMobileState extends State<FrontMobile>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Container(
-              // Uncomment the following lines to set a background image
-              // child: Image.asset(
-              //   'assets/your_background_image.png',
-              //   fit: BoxFit.cover,
-              // ),
+    final screenWidth = Get.width;
+    final dark = SNHelperFunctions.isDarkMode(context);
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20),
+
+              // Saree Type Circles in a wrap for responsiveness
+              Wrap(
+                spacing: 20,
+                runSpacing: 20,
+                alignment: WrapAlignment.center,
+                children: [
+                  buildSareeCircle(
+                    'assets/sarees/ownimage1.png',
+                    'Cotton Sarees',
+                    dark,
+                    () => Get.toNamed('/bridalCollectionsmobile')
+                  ),
+                  buildSareeCircle(
+                    'assets/sarees/ownimage2.png',
+                    'Silk Sarees',
+                    dark,
+                    () => Get.toNamed('/bridalCollectionsmobile', )
+                  ),
+                  buildSareeCircle(
+                    'assets/sarees/ownimage3.png',
+                    'Salwar Suits',
+                    dark,
+                    () => Get.toNamed('/bridalCollectionsmobile')
+                  ),
+                  buildSareeCircle(
+                    'assets/sarees/ownimage4.png',
+                    'Daily Wear',
+                    dark,
+                    () => Get.toNamed('/bridalCollectionsmobile')
+                  ),
+                ],
               ),
-        ),
-        // MobileNavBar(
-        //   scrollToContact: scrollToContact,
-        //   scrollToFeatures: scrollToFeatures,
-        //   scrollToHome: scrollToHome,
-        //   onNavItemTap: onNavItemTap, // Pass the onNavItemTap function
-        //   scaffoldKey: scaffoldKey,
-        // ),
-        // Content
-        SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: w! / 20, vertical: 20),
-            child: ProColumn(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 30),
-                Center(
-                  child: Text(
-                    'Where craftsmanship meets elegance. Woodwork that lasts a lifetime.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: w! / 16,
-                      fontWeight: FontWeight.bold,
-                      height: 1.5,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'At Sri RK Woodlands, we specialize in crafting the finest wooden products that blend timeless elegance with durability. Whether you’re furnishing your home or office, our expertly crafted wood items ensure a touch of sophistication in every space. Discover our wide range of products designed to elevate your surroundings with natural beauty and strength.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // IconButton(
-                    //   icon: ShaderMask(
-                    //     shaderCallback: (bounds) => const LinearGradient(
-                    //       colors: [
-                    //         Colors.pinkAccent,
-                    //         Colors.blueAccent,
-                    //       ],
-                    //       begin: Alignment.topLeft,
-                    //       end: Alignment.bottomRight,
-                    //     ).createShader(bounds),
-                    //     child: const Icon(
-                    //       Icons.apple,
-                    //       size: 40,
-                    //       color: Colors.white,
-                    //     ),
-                    //   ),
-                    //   onPressed: () {},
-                    // ),
-                    // IconButton(
-                    //   icon: ShaderMask(
-                    //     shaderCallback: (bounds) => const LinearGradient(
-                    //       colors: [
-                    //         Colors.pinkAccent,
-                    //         Colors.blueAccent,
-                    //       ],
-                    //       begin: Alignment.topLeft,
-                    //       end: Alignment.bottomRight,
-                    //     ).createShader(bounds),
-                    //     child: const Icon(
-                    //       Icons.android,
-                    //       size: 40,
-                    //       color: Colors.white,
-                    //     ),
-                    //   ),
-                    //   onPressed: () {},
-                    // ),
-                    IconButton(
-                      icon: ShaderMask(
-                        shaderCallback: (bounds) => const LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 233, 156, 13),
-                            Color.fromARGB(255, 245, 208, 85),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ).createShader(bounds),
-                        child: const Icon(
-                          Icons.shopping_cart_checkout_outlined,
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const Divider(
-                  height: 4,
-                  color: Colors.white,
-                ),
-              ],
-            ),
+
+              const SizedBox(height: 40),
+              // You can add navigation buttons or scroll triggers here if needed
+            ],
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  /// Circle image with label
+  Widget buildSareeCircle(String imagePath, String label, bool dark, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 130,
+            height: 130,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: dark ? Colors.white : Colors.amberAccent, width: 1.5),
+              image: DecorationImage(
+                image: AssetImage(imagePath),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
     );
   }
 }

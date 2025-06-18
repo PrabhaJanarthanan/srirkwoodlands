@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:profinix_app/website/utils/colors.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class FooterTablet extends StatefulWidget {
   const FooterTablet({super.key});
@@ -27,7 +26,7 @@ class _FooterTabletState extends State<FooterTablet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const ProText(
+          const Text(
             '© 2024 Profinix Technologies, Inc.',
             style: TextStyle(
               fontSize: 22, // Slightly increased font size for tablet
@@ -46,7 +45,7 @@ class _FooterTabletState extends State<FooterTablet> {
                 onTap: () {
                   Get.toNamed('/privacypolicy');
                 },
-                child: const ProText(
+                child: const Text(
                   'Privacy Policy',
                   style: TextStyle(
                     color: Colors.white,
@@ -60,7 +59,7 @@ class _FooterTabletState extends State<FooterTablet> {
                 onTap: () {
                   Get.toNamed('/termsandconditions');
                 },
-                child: const ProText(
+                child: const Text(
                   'Terms and Conditions',
                   style: TextStyle(
                     color: Colors.white,
@@ -74,7 +73,7 @@ class _FooterTabletState extends State<FooterTablet> {
                 onTap: () {
                   Get.toNamed('/returnsrefund');
                 },
-                child: const ProText(
+                child: const Text(
                   'Refund Policy',
                   style: TextStyle(
                     color: Colors.white,

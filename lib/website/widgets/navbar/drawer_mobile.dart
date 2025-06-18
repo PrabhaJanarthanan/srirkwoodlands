@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/utils/constants.dart';
 
 class DrawerMobile extends StatelessWidget {
   final Function(int) onNavItemTap;
@@ -26,15 +25,7 @@ class DrawerMobile extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            // ListTile(
-            //   leading: const Icon(Icons.featured_play_list,
-            //       color: Colors.white),
-            //   title: const Text('Features'),
-            //   onTap: () {
-            //     onNavItemTap(1); // Navigate to Features
-            //     Navigator.pop(context);
-            //   },
-            // ),
+        
             ListTile(
               leading:
                   const Icon(Icons.phone_android_outlined, color: Colors.white),

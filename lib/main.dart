@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:profinix_app/firebase_options.dart';
 import 'package:profinix_app/website/controller/auth_controller.dart';
 import 'package:profinix_app/website/controller/order_controller.dart';
-import 'package:profinix_app/website/utils/colors.dart';
+import 'package:profinix_app/website/utils/theme/theme.dart';
 import 'package:profinix_app/website/utils/webroutes.dart';
+
+import 'website/controller/wishlist_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,20 +16,14 @@ void main() async {
   );
   Get.put(AuthController(), permanent: true);
   Get.put(OrderController(), permanent: true);
+  Get.lazyPut(() => WishlistController());
 
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      fontFamily: 'Ubuntu',
-      brightness: Brightness.light,
-      primaryColor: WebColors.primary,
-      textTheme: const TextTheme(
-        bodyMedium: TextStyle(fontSize: 14.0),
-      ),
-    ),
-    darkTheme: ThemeData.light(),
-    themeMode: ThemeMode.system,
-    title: 'Sri RK Woodlands',
+    theme: SNWebsiteTheme.lightTheme,
+    darkTheme: SNWebsiteTheme.darkTheme,
+    themeMode: ThemeMode.light, 
+    title: 'Sri Nivi Boutique',
     initialRoute: '/',
     getPages: webroutes,
   ));

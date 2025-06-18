@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:profinix_app/website/pages/privacypolicy/privacycontent.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class PrivacyPolicyDesktop extends StatelessWidget {
   @override
@@ -17,17 +15,17 @@ class PrivacyPolicyDesktop extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: const ProText(
+        title: const Text(
           'Back',
           style: TextStyle(color: Colors.white),
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/rkbackgroundbrown.png'),
-              fit: BoxFit.cover),
-        ),
+        // decoration: const BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage('assets/rkbackgroundbrown.png'),
+        //       fit: BoxFit.cover),
+        // ),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(
@@ -37,7 +35,7 @@ class PrivacyPolicyDesktop extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Privacy Policy',
                     style: TextStyle(
                         fontSize: 24.0,
@@ -45,10 +43,10 @@ class PrivacyPolicyDesktop extends StatelessWidget {
                         color: Colors.white),
                   ),
                   SizedBox(height: 20.0),
-                  ProText(
-                    privacypolicycontent,
-                    style: TextStyle(fontSize: 16.0, color: Colors.white),
-                  ),
+                  // ProText(
+                  //   privacypolicycontent,
+                  //   style: TextStyle(fontSize: 16.0, color: Colors.white),
+                  // ),
                 ],
               ),
             ),

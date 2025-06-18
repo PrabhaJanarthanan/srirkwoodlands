@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:profinix_app/website/pages/termsandconditions/terms_content.dart';
-import 'package:profinix_app/website/widgets/basewidgets.dart';
 
 class TermsTablet extends StatelessWidget {
   @override
@@ -18,7 +16,7 @@ class TermsTablet extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: const ProText(
+        title: const Text(
           'Back',
           style: TextStyle(color: Colors.white),
         ),
@@ -39,7 +37,7 @@ class TermsTablet extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProText(
+                  Text(
                     'Terms and Conditions',
                     style: TextStyle(
                         fontSize: 22.0, // Reduced font size slightly
@@ -47,12 +45,12 @@ class TermsTablet extends StatelessWidget {
                         color: Colors.white),
                   ),
                   SizedBox(height: 15.0), // Adjusted spacing
-                  ProText(
-                    termsAndConditionsContent,
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white), // Reduced font size slightly
-                  ),
+                  // ProText(
+                  //   termsAndConditionsContent,
+                  //   style: TextStyle(
+                  //       fontSize: 15.0,
+                  //       color: Colors.white), // Reduced font size slightly
+                  // ),
                 ],
               ),
             ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:profinix_app/website/pages/discoverthebeauty/discoverthebeauty_desktop.dart';
-import 'package:profinix_app/website/pages/contactpage/contact_desktop.dart';
-import 'package:profinix_app/website/pages/features/features_desktop.dart';
+
 import 'package:profinix_app/website/pages/footer/footer_desktop.dart';
 import 'package:profinix_app/website/pages/frontpage/front_desktop.dart';
-import 'package:profinix_app/website/pages/mainfeatures/mainfeatures_section.dart';
-import 'package:profinix_app/website/pages/ownmanufacturer/ownmanufacturer_desktop.dart';
-import 'package:profinix_app/website/pages/whychoose/whychoose_desktop.dart';
-import 'package:profinix_app/website/pages/woodtype/woodtype_desktop.dart';
+
 import 'package:profinix_app/website/widgets/navbar/desktop_navbar.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../boutique_content/boutique_content.dart';
+import '../boutique_description/boutique_desc_desktop.dart';
+import '../other_products_video/otherproducts.dart';
+import '../shopping/product_listing/product_listing_desktop.dart';
 
 class HomePageDesktop extends StatefulWidget {
   final ScrollController scrollController;
@@ -91,12 +91,16 @@ class _HomePageDesktopState extends State<HomePageDesktop>
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(
+            Positioned.fill(
             child: Image.asset(
-              'assets/rkbackgroundbrown.png',
+              Theme.of(context).brightness == Brightness.dark
+              ?'assets/background/srinivibackgrounddark.png'
+              : 'assets/background/srinivibackgroundlight.png',
               fit: BoxFit.cover,
             ),
           ),
+
+          
           Column(
             children: [
               // Navigation bar
@@ -115,24 +119,21 @@ class _HomePageDesktopState extends State<HomePageDesktop>
                   controller: widget.scrollController,
                   child: Column(
                     children: [
-                      FrontDesktop(
-                        key: widget.homekey,
-                        scrollToContact: widget.scrollToContact,
-                        scrollToFeatures: widget.scrollToFeatures,
-                        scrollToHome: widget.scrollToHome,
-                      ),
-                      FeaturesDesktop(),
-                      const SizedBox(height: 60),
-                      const WhywhatsappDesktop(),
-                      OwnmanufacturerDesktop(),
-                      // const SizedBox(height: 60),
-                      const AistudioDesktop(),
-                      // const SizedBox(height: 60),
-                      //MainfeaturesSection(key: widget.featureskey),
-                      const SizedBox(height: 30),
-                      const WorldwideDesktop(),
-                      const SizedBox(height: 30),
-                      ContactPageDesktop(key: widget.contactKey),
+                      OtherProductsSection(),
+                      // FrontDesktop(
+                      //   key: widget.homekey,
+                      //   scrollToContact: widget.scrollToContact,
+                      //   scrollToFeatures: widget.scrollToFeatures,
+                      //   scrollToHome: widget.scrollToHome,
+                      // ),
+                      BoutiqueDescDesktop(),
+                      SizedBox(height: 20),
+                      ProductListingDesktop(),
+                      SizedBox(height: 20),
+                      //OtherProductsSection(),
+                      // SizedBox(height: 20),
+                       SriNiviBoutiqueContent(),
+                  
                       const FooterDesktop(),
                     ],
                   ),
@@ -166,27 +167,27 @@ class _HomePageDesktopState extends State<HomePageDesktop>
             ),
           ),
           // WhatsApp FAB
-          Positioned(
-            right: 10,
-            bottom: 10,
-            child: ScaleTransition(
-              scale: Tween(begin: 1.0, end: 1.2).animate(
-                CurvedAnimation(
-                  parent: _controller,
-                  curve: Curves.easeInOut,
-                ),
-              ),
-              child: FloatingActionButton(
-                onPressed: _openWhatsApp,
-                backgroundColor: Colors.transparent,
-                child: Image.asset(
-                  'assets/logo/whatsappicon.png',
-                  width: 50,
-                  height: 50,
-                ),
-              ),
-            ),
-          ),
+          // Positioned(
+          //   right: 10,
+          //   bottom: 10,
+          //   child: ScaleTransition(
+          //     scale: Tween(begin: 1.0, end: 1.2).animate(
+          //       CurvedAnimation(
+          //         parent: _controller,
+          //         curve: Curves.easeInOut,
+          //       ),
+          //     ),
+          //     child: FloatingActionButton(
+          //       onPressed: _openWhatsApp,
+          //       backgroundColor: Colors.transparent,
+          //       child: Image.asset(
+          //         'assets/logo/whatsappicon.png',
+          //         width: 50,
+          //         height: 50,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
